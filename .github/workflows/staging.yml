@@ -22,7 +22,7 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      # BACKEND
+            # BACKEND
       - name: Install backend deps
         working-directory: server
         run: npm install
@@ -31,9 +31,24 @@ jobs:
         working-directory: server
         run: npm run build
 
+      - name: Start backend in background
+        working-directory: server
+        run: |
+          # start server in background and save PID
+          PORT=8080 npm start > server_stdout.log 2>&1 &
+          echo $! > server.pid
+          # small sleep to let server boot (adjust if needed)
+          sleep 3
+
       - name: Run backend smoke
         working-directory: server
         run: npm run smoke
+
+      - name: Stop backend
+        working-directory: server
+        run: |
+          kill $(cat server.pid) || true
+
 
       # FRONTEND
       - name: Install web deps
