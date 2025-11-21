@@ -4,6 +4,10 @@ import { config } from 'dotenv';
 config();
 import { healthRouter } from './routes/health.js';
 import partnerRouter from './routes/partner.js';
+import analyticsRouter from './routes/analytics.js';
+import logsRouter from './routes/logs.js';
+import personaRouter from './routes/persona.js';
+import creatorRouter from './routes/creator.js';
 import { z } from 'zod';
 
 const FeatureFlags=z.object({
@@ -29,6 +33,10 @@ app.get('/api/status',(_req,res)=>{
 
 app.use('/api/health',healthRouter);
 app.use('/api/partner', partnerRouter);
+app.use('/api/analytics', analyticsRouter);
+app.use('/api/logs', logsRouter);
+app.use('/api/persona', personaRouter);
+app.use('/api/creator', creatorRouter);
 
 app.post('/api/smoke/core',(req,res)=>{
     const ok=true;
