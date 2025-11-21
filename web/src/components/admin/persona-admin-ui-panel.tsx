@@ -257,7 +257,7 @@ export default function PersonaAdminUIPanel() {
       </div>
 
       {/* Quick Stats */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+      <div className="grid grid-rows-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
         <div className="rounded-2xl border bg-white p-4 shadow-sm">
           <div className="text-xs text-gray-500">Total</div>
           <div className="mt-1 text-2xl font-semibold">{stats.total}</div>
